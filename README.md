@@ -1,4 +1,4 @@
-# React-REDUX_POC
+# React-Redux App
 
 
 
