@@ -11,7 +11,7 @@ import $ from 'jquery';
 
 
 /**
- * Get all users
+ * Get all phones
  */
 
 export function getPhones() {
