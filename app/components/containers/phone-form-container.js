@@ -15,7 +15,7 @@ const PhoneFormContainer= React.createClass({
 
   render: function() {
     return (
-      <PhoneForm onSubmit={this.handleSubmit} id="phoneForm"/>
+      <PhoneForm onSubmit={this.handleSubmit} id="phoneForm" message={this.props.message}/>
     );
   }
 

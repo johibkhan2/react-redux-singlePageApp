@@ -3,8 +3,7 @@ import _ from 'lodash';
 
 const initialState = {
   phones: [],
-  message:'',
-  error :''
+  message:''
 };
 
 const phoneReducer = function(state = initialState, action) {
@@ -16,7 +15,7 @@ const phoneReducer = function(state = initialState, action) {
     case types.ADD_PHONE_SUCCESS:
       return Object.assign({}, state, { message: action.message });
     case types.ADD_PHONE_FAILURE:
-      return Object.assign({}, state, { error: action.error });
+      return Object.assign({}, state, { message: action.message });
   }
 
   return state;

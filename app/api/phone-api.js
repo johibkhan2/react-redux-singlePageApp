@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import store from '../store';
-import { getPhonesSuccess,addPhonesSuccess} from '../actions/phone-actions';
+import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure} from '../actions/phone-actions';
 import $ from 'jquery';
 
 
@@ -27,14 +27,26 @@ export function addPhone(phone) {
   var form_data = new FormData(phone);
   return axios.post('http://localhost:8080/addPhone',form_data)
     .then(response => {
-      store.dispatch(addPhonesSuccess(response));
+      store.dispatch(addPhonesSuccess('successfully added'));
       return response;
     })
     .catch(function (error) {
-      store.dispatch(addPhonesFailure(error));
-      console.log(error);
+ /*      // console.log(error);
+      store.dispatch(addPhonesFailure('some issue occurred'));*/
+        if (error.response) {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            store.dispatch(addPhonesFailure(error.response.data));
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+            store.dispatch(addPhonesFailure(error.message));
+        }
+        console.log(error.config);
       return error;
     });
-    ;
 
 }

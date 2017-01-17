@@ -17,9 +17,9 @@ export function addPhonesSuccess(message) {
   };
 }
 
-export function addPhonesFailure(error) {
+export function addPhonesFailure(message) {
   return {
     type: types.ADD_PHONE_FAILURE,
-    error
+      message
   };
 }

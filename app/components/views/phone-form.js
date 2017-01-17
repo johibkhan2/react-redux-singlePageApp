@@ -13,7 +13,8 @@ export default React.createClass({
         <br/>
         <LabelInput label="Price" name="phonePrice" id="phonePrice" />
         <br/>
-        <p id="error"></p>
+        <p id="error">{this.props.message}</p>
+        <br/>
         <button className="btn btn-default" onClick={this.props.onSubmit.bind(this)}>Submit</button>
       </form>
 
