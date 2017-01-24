@@ -8,7 +8,7 @@ a Single Page Application which resembles this functionality:
 
 ## Installing and Running
 
-To start, make sure you're in the `guide-3-redux` folder in command-line.
+To start, make sure you're in the `react-redux-singlePageApp` folder in command-line.
 
 ```sh
 # Install Node Modules
