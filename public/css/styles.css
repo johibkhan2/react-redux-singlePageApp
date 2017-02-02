@@ -187,8 +187,9 @@ main {
 }
 
 .add-phone{
-/*  float:left;*/
   list-style-type: none;
+  display: block;
+  float: right;
 }
 
 .input-xs {
