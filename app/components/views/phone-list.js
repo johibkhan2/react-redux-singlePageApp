@@ -14,6 +14,7 @@ export default function(props) {
               <Link to={'/phones/' + phone.id}>{phone.name}</Link>
             </div>
           </div>
+  
         );
 
       })}
