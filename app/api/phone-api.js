@@ -22,6 +22,14 @@ export function getPhones() {
     });
 }
 
+export function searchPhones(query = '') {
+  return axios.get('http://localhost:3001/phones?q='+ query)
+    .then(response => {
+      store.dispatch(getPhonesSuccess(response.data));
+      return response;
+    });
+}
+
 export function addPhone(phone) {
 //created spring rest service to make a post call
   var form_data = new FormData(phone);

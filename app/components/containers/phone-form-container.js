@@ -10,7 +10,7 @@ const PhoneFormContainer= React.createClass({
     event.preventDefault();
     var myForm = document.getElementById('phoneForm');
     phoneApi.addPhone(myForm);
-    console.log("login succesfull");
+    console.log("phone added successfully");
   },
 
   render: function() {
