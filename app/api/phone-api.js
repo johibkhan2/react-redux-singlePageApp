@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import store from '../store';
-import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure} from '../actions/phone-actions';
+import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure,phoneProfileSuccess} from '../actions/phone-actions';
 import $ from 'jquery';
 
 
@@ -22,6 +22,10 @@ export function getPhones() {
     });
 }
 
+
+
+
+
 export function searchPhones(query = '') {
   return axios.get('http://localhost:3001/phones?q='+ query)
     .then(response => {
@@ -29,6 +33,18 @@ export function searchPhones(query = '') {
       return response;
     });
 }
+
+export function getPhoneProfile(phoneId) {
+
+  // Get the user data from our local database.
+  return axios.get('http://localhost:3001/phones/' + phoneId)
+    .then(response => {
+    store.dispatch(phoneProfileSuccess(response.data));
+      return response;
+    });
+}
+
+
 
 export function addPhone(phone) {
 //created spring rest service to make a post call

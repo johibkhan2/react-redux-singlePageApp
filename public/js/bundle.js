@@ -66,7 +66,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(285).polyfill();
+	__webpack_require__(288).polyfill();
 	
 	// Provider is a top-level component that wrapps our entire application, including
 	// the Router. We pass it a reference to the store so we can use react-redux's
@@ -21630,6 +21630,8 @@
 	var ADD_PHONE_SUCCESS = exports.ADD_PHONE_SUCCESS = 'ADD_PHONE_SUCCESS';
 	
 	var ADD_PHONE_FAILURE = exports.ADD_PHONE_FAILURE = 'ADD_PHONE_FAILURE';
+	
+	var PHONE_PROFILE_SUCCESS = exports.PHONE_PROFILE_SUCCESS = 'PHONE_PROFILE_SUCCESS';
 
 /***/ },
 /* 193 */
@@ -21657,7 +21659,8 @@
 	
 	var initialState = {
 	  phones: [],
-	  message: ''
+	  message: '',
+	  phoneProfile: {}
 	};
 	
 	var phoneReducer = function phoneReducer() {
@@ -21673,6 +21676,8 @@
 	      return _extends({}, state, { message: action.message });
 	    case types.ADD_PHONE_FAILURE:
 	      return _extends({}, state, { message: action.message });
+	    case types.PHONE_PROFILE_SUCCESS:
+	      return _extends({}, state, { phoneProfile: action.phoneProfile });
 	  }
 	
 	  return state;
@@ -38795,20 +38800,28 @@
 	
 	var _searchLayoutContainer2 = _interopRequireDefault(_searchLayoutContainer);
 	
-	var _home = __webpack_require__(279);
+	var _home = __webpack_require__(280);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _phoneListContainer = __webpack_require__(280);
+	var _phoneListContainer = __webpack_require__(281);
 	
 	var _phoneListContainer2 = _interopRequireDefault(_phoneListContainer);
 	
-	var _phoneFormContainer = __webpack_require__(282);
+	var _phoneFormContainer = __webpack_require__(283);
 	
 	var _phoneFormContainer2 = _interopRequireDefault(_phoneFormContainer);
 	
+	var _phoneProfileContainer = __webpack_require__(286);
+	
+	var _phoneProfileContainer2 = _interopRequireDefault(_phoneProfileContainer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// Pages
+	
+	
+	// Layouts
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
@@ -38824,15 +38837,11 @@
 	        { component: _searchLayoutContainer2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _phoneListContainer2.default })
 	      ),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'addPhone', component: _phoneFormContainer2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: 'addPhone', component: _phoneFormContainer2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':phoneId', component: _phoneProfileContainer2.default })
 	    )
 	  )
 	);
-	
-	// Pages
-	
-	
-	// Layouts
 
 /***/ },
 /* 196 */
@@ -44037,15 +44046,7 @@
 	    _react2.default.createElement(
 	      'header',
 	      { className: 'search-header' },
-	      _react2.default.createElement(
-	        'li',
-	        { className: 'add-phone' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/phones/addPhone', activeClassName: 'active' },
-	          'Add Phone'
-	        )
-	      ),
+	      _react2.default.createElement(_addPhoneLink2.default, null),
 	      _react2.default.createElement(_searchFormContainer2.default, { searchType: props.searchType })
 	    ),
 	    _react2.default.createElement(
@@ -44072,6 +44073,10 @@
 	
 	var _reactRouter = __webpack_require__(196);
 	
+	var _addPhoneLink = __webpack_require__(279);
+	
+	var _addPhoneLink2 = _interopRequireDefault(_addPhoneLink);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
@@ -44139,6 +44144,7 @@
 	});
 	exports.getPhones = getPhones;
 	exports.searchPhones = searchPhones;
+	exports.getPhoneProfile = getPhoneProfile;
 	exports.addPhone = addPhone;
 	
 	var _axios = __webpack_require__(258);
@@ -44176,6 +44182,15 @@
 	
 	  return _axios2.default.get('http://localhost:3001/phones?q=' + query).then(function (response) {
 	    _store2.default.dispatch((0, _phoneActions.getPhonesSuccess)(response.data));
+	    return response;
+	  });
+	}
+	
+	function getPhoneProfile(phoneId) {
+	
+	  // Get the user data from our local database.
+	  return _axios2.default.get('http://localhost:3001/phones/' + phoneId).then(function (response) {
+	    _store2.default.dispatch((0, _phoneActions.phoneProfileSuccess)(response.data));
 	    return response;
 	  });
 	}
@@ -45309,6 +45324,7 @@
 	exports.getPhonesSuccess = getPhonesSuccess;
 	exports.addPhonesSuccess = addPhonesSuccess;
 	exports.addPhonesFailure = addPhonesFailure;
+	exports.phoneProfileSuccess = phoneProfileSuccess;
 	
 	var _actionTypes = __webpack_require__(192);
 	
@@ -45335,6 +45351,13 @@
 	  return {
 	    type: types.ADD_PHONE_FAILURE,
 	    message: message
+	  };
+	}
+	
+	function phoneProfileSuccess(phoneProfile) {
+	  return {
+	    type: types.PHONE_PROFILE_SUCCESS,
+	    phoneProfile: phoneProfile
 	  };
 	}
 
@@ -55486,6 +55509,48 @@
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(196);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* 
+	 * To change this license header, choose License Headers in Project Properties.
+	 * To change this template file, choose Tools | Templates
+	 * and open the template in the editor.
+	 */
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'add-phone-link',
+	
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'li',
+	      { className: 'add-phone' },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/phones/addPhone', activeClassName: 'active' },
+	        'Add Phone'
+	      )
+	    );
+	  }
+	
+	});
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -55522,7 +55587,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55537,7 +55602,7 @@
 	
 	var _reactRedux = __webpack_require__(159);
 	
-	var _phoneList = __webpack_require__(281);
+	var _phoneList = __webpack_require__(282);
 	
 	var _phoneList2 = _interopRequireDefault(_phoneList);
 	
@@ -55583,7 +55648,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(PhoneListContainer);
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55624,7 +55689,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55637,7 +55702,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _phoneForm = __webpack_require__(283);
+	var _phoneForm = __webpack_require__(284);
 	
 	var _phoneForm2 = _interopRequireDefault(_phoneForm);
 	
@@ -55683,7 +55748,7 @@
 	//export default PhoneFormContainer
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55696,7 +55761,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _labelInput = __webpack_require__(284);
+	var _labelInput = __webpack_require__(285);
 	
 	var _labelInput2 = _interopRequireDefault(_labelInput);
 	
@@ -55734,7 +55799,7 @@
 	});
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55771,7 +55836,96 @@
 	     */
 
 /***/ },
-/* 285 */
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(159);
+	
+	var _phoneProfile = __webpack_require__(287);
+	
+	var _phoneProfile2 = _interopRequireDefault(_phoneProfile);
+	
+	var _phoneApi = __webpack_require__(257);
+	
+	var phoneApi = _interopRequireWildcard(_phoneApi);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PhoneProfileContainer = _react2.default.createClass({
+	  displayName: 'PhoneProfileContainer',
+	
+	
+	  componentDidMount: function componentDidMount() {
+	    var phoneId = this.props.params.phoneId;
+	    phoneApi.getPhoneProfile(phoneId);
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(_phoneProfile2.default, this.props.profile);
+	  }
+	
+	});
+	
+	var mapStateToProps = function mapStateToProps(store) {
+	  return {
+	    profile: store.phoneState.phoneProfile
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(PhoneProfileContainer);
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "user-profile" },
+	    _react2.default.createElement("img", { src: props.imageUrl }),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "details" },
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        props.name
+	      ),
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        props.snippet
+	      )
+	    )
+	  );
+	};
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -55910,7 +56064,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(286);
+	    var vertx = __webpack_require__(289);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -56934,7 +57088,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 286 */
+/* 289 */
 /***/ function(module, exports) {
 
 	/* (ignored) */

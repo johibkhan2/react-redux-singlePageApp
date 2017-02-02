@@ -9,6 +9,7 @@ import SearchLayoutContainer from './components/containers/search-layout-contain
 import Home from './components/home';
 import phoneListContainer from './components/containers/phone-list-container';
 import phoneFormContainer from './components/containers/phone-form-container';
+import phoneProfileContainer from './components/containers/phone-profile-container'; 
 
 export default (
   <Router history={browserHistory}>
@@ -19,6 +20,7 @@ export default (
         <IndexRoute component={phoneListContainer} />
       </Route>
        <Route path="addPhone" component={phoneFormContainer}/>
+       <Route path=":phoneId" component={phoneProfileContainer} />        
     </Route>
 
 

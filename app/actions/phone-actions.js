@@ -23,3 +23,10 @@ export function addPhonesFailure(message) {
       message
   };
 }
+
+export function phoneProfileSuccess(phoneProfile) {
+  return {
+    type: types.PHONE_PROFILE_SUCCESS,
+      phoneProfile
+  };
+}
