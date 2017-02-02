@@ -55667,7 +55667,7 @@
 	  },
 	
 	  render: function render() {
-	    return _react2.default.createElement(_phoneForm2.default, { onSubmit: this.handleSubmit, id: 'phoneForm', message: this.props.message });
+	    return _react2.default.createElement(_phoneForm2.default, { handleSubmit: this.handleSubmit, id: 'phoneForm', message: this.props.message });
 	  }
 	
 	});
@@ -55712,7 +55712,7 @@
 	  render: function render(props) {
 	    return _react2.default.createElement(
 	      'form',
-	      { id: this.props.id, name: this.props.id },
+	      { id: this.props.id, name: this.props.id, onSubmit: this.props.handleSubmit },
 	      _react2.default.createElement(_labelInput2.default, { label: 'Phone', name: 'phoneName', id: 'phoneName' }),
 	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(_labelInput2.default, { label: 'Price', name: 'phonePrice', id: 'phonePrice' }),
@@ -55725,7 +55725,7 @@
 	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'btn btn-default', onClick: this.props.onSubmit.bind(this) },
+	        { className: 'btn btn-default' },
 	        'Submit'
 	      )
 	    );
