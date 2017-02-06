@@ -4,7 +4,7 @@
 import axios from 'axios';
 import store from '../store';
 import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure,phoneProfileSuccess,getMorePhonesSuccess} from '../actions/phone-actions';
-import $ from 'jquery';
+
 
 export function getMorePhones(loadRange) {
 //  return axios.get('http://localhost:3003/phones')

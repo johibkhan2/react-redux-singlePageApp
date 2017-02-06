@@ -10,6 +10,7 @@ import store from '../../store';
 import { loadSearchLayout } from '../../actions/search-layout-actions';
 import { getPhonesSuccess } from '../../actions/phone-actions';
 import axios from 'axios';
+import $ from 'jquery';
 
 
 const PhoneListContainer = React.createClass({
@@ -27,17 +28,26 @@ const PhoneListContainer = React.createClass({
 },
 
 loadMore : function(event){
-    var target = event.target || event.srcElement;
-    let scrollTop = target.body.scrollTop;
-    var body = document.body,
-    html = document.documentElement;
-
-    var height = Math.max( body.scrollHeight, body.offsetHeight, 
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
-     if(scrollTop + window.innerHeight===height)
+        /*****  
+         * 
+         * java script solun however it doesnot work in mozill and ie
+         * var target = event.target || event.srcElement;
+         let scrollTop = target.body.scrollTop;
+         var body = document.body,
+         html = document.documentElement;
+         var height = Math.max( body.scrollHeight, body.offsetHeight, 
+         html.clientHeight, html.scrollHeight, html.offsetHeight );****/
+        /* If you wanted to instead check if the user is near the bottom, it'd look something like this:
+         
+         $(window).scroll(function() {
+         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+         alert("near bottom!");
+         }
+         })*/
+     if($(window).scrollTop() + $(window).height() == $(document).height())
          return true;
          return false;
-  
+
 },
 
 handleScroll: function(event) {
