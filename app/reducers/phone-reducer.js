@@ -4,7 +4,8 @@ import _ from 'lodash';
 const initialState = {
   phones: [],
   message:'',
-  phoneProfile:{}
+  phoneProfile:{},
+  loadRange:0
 };
 
 const phoneReducer = function(state = initialState, action) {
@@ -13,6 +14,8 @@ const phoneReducer = function(state = initialState, action) {
 
     case types.GET_PHONES_SUCCESS:
       return Object.assign({}, state, { phones: action.phones });
+    case types.GET_MORE_PHONES_SUCCESS:
+     return Object.assign({}, state, { phones: state.phones.concat(action.phones) },{loadRange:action.loadRange});  
     case types.ADD_PHONE_SUCCESS:
       return Object.assign({}, state, { message: action.message });
     case types.ADD_PHONE_FAILURE:

@@ -43,7 +43,7 @@ gulp.task('serve:api', ['restore-database'], function(done) {
     .on('close', done);
 });
 
-
+//node ./node_modules/json-server/bin/index.js --watch ./data/load.json --port 3003
 /**
  * Node Server (Express)
  */

@@ -3,6 +3,15 @@
  */
 import * as types from '../actions/action-types';
 
+export function getMorePhonesSuccess(phones,loadRange) {
+  return {
+    type: types.GET_MORE_PHONES_SUCCESS,
+    phones,
+    loadRange
+  };
+}
+
+
 export function getPhonesSuccess(phones) {
   return {
     type: types.GET_PHONES_SUCCESS,

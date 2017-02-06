@@ -3,10 +3,26 @@
  */
 import axios from 'axios';
 import store from '../store';
-import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure,phoneProfileSuccess} from '../actions/phone-actions';
+import { getPhonesSuccess,addPhonesSuccess,addPhonesFailure,phoneProfileSuccess,getMorePhonesSuccess} from '../actions/phone-actions';
 import $ from 'jquery';
 
-
+export function getMorePhones(loadRange) {
+//  return axios.get('http://localhost:3003/phones')
+//    .then(response => {
+//      store.dispatch(getMorePhonesSuccess(response.data));
+//      return response;
+//    });
+    const range=100;
+    let phones=new Array();
+    for(var i=loadRange+1; i<loadRange+range; i++){
+    let phone={age:i,carrier:'xyx'+i,id:'test-'+i,imageUrl:'/img/phones/samsung-gem.0.jpg',name:'This is a on scroll load test'+i,snippet:''};
+    phones.push(phone);
+    }
+      store.dispatch(getMorePhonesSuccess(phones,loadRange+range));
+      return phones;
+}
+    
+    
 
 
 
