@@ -26,8 +26,9 @@ const PhoneListContainer = React.createClass({
     window.removeEventListener('scroll', this.handleScroll);
 },
 
-loadMore : function(){
-    let scrollTop = event.srcElement.body.scrollTop;
+loadMore : function(event){
+    var target = event.target || event.srcElement;
+    let scrollTop = target.body.scrollTop;
     var body = document.body,
     html = document.documentElement;
 
@@ -40,7 +41,8 @@ loadMore : function(){
 },
 
 handleScroll: function(event) {
-    if(this.loadMore()){
+    event.preventDefault();
+    if(this.loadMore(event)){
         console.log("scrolling");
         phoneApi.getMorePhones(this.props.loadRange);      
     }                   
