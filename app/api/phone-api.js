@@ -15,7 +15,7 @@ export function getMorePhones(loadRange) {
     const range=100;
     let phones=new Array();
     for(var i=loadRange+1; i<loadRange+range; i++){
-    let phone={age:i,carrier:'xyx'+i,id:'test-'+i,imageUrl:'/img/phones/samsung-gem.0.jpg',name:'This is a on scroll load test'+i,snippet:''};
+    let phone={age:i,carrier:'This is a on scroll load test'+i,id:'test-This-is-a-on-scroll-load-test'+i,imageUrl:'/img/phones/samsung-gem.0.jpg',name:'This is a on scroll load test'+i,snippet:''};
     phones.push(phone);
     }
       store.dispatch(getMorePhonesSuccess(phones,loadRange+range));
