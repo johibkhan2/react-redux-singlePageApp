@@ -1,11 +1,19 @@
 {
+<<<<<<< HEAD
   "name": "react-redux-singlePage",
+=======
+  "name": "react-redux-app",
+>>>>>>> d62ff242b4af2330c3f7948d73e0ec45ab53dd2f
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "start": "gulp"
   },
+<<<<<<< HEAD
   "author": "Johib Khan <johib.khan@gmail.com",
+=======
+  "author": "Johib Khan<johib.khan@gmail.com>",
+>>>>>>> d62ff242b4af2330c3f7948d73e0ec45ab53dd2f
   "license": "",
   "dependencies": {
     "express": "^4.13.4",
