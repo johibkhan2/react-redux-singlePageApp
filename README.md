@@ -14,6 +14,9 @@ To start, make sure you're in the `react-redux-singlePageApp` folder in command-
 # Install Node Modules
 npm install
 
+#to install gulp
+npm install -g gulp
+
 # Start the Server
 gulp
 

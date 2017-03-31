@@ -1,12 +1,12 @@
 {
-  "name": "react-guide",
+  "name": "react-redux-singlePage",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "start": "gulp"
   },
-  "author": "Brad Westfall <brad@azpixels.com>",
-  "license": "ISC",
+  "author": "Johib Khan <johib.khan@gmail.com",
+  "license": "",
   "dependencies": {
     "express": "^4.13.4",
     "json-server": "^0.8.8",
