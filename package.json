@@ -6,7 +6,7 @@
     "start": "gulp"
   },
   "author": "Johib Khan<johib.khan@gmail.com>",
-  "license": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
     "json-server": "^0.8.8",
